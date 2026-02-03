@@ -1,0 +1,8 @@
+plugin: community.proxmox.proxmox
+url: https://<PROXMOX_IP>:8006
+user: <USER>@pve
+token_id: <TOKEN_ID>
+token_secret: <TOKEN_SECRET>
+validate_certs: false
+# Optional: Filter for only running VMs
+want_facts: true
