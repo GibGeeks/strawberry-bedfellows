@@ -1,0 +1,19 @@
+---
+- name: List Proxmox VMs
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Get VM info from Proxmox
+      community.proxmox.proxmox_vm_info:
+        api_host: "{{ pve_host }}"
+        api_user: "{{ pve_user }}"
+        api_token_id: "{{ pve_token_id }}"
+        api_token_secret: "{{ pve_token_secret }}"
+        node: "{{ pve_node }}"
+        type: qemu
+      register: vm_list
+
+    - name: Display VM names
+      ansible.builtin.debug:
+        msg: "Found VM: {{ item.name }} (ID: {{ item.vmid }})"
+      loop: "{{ vm_list.proxmox_vms }}"
